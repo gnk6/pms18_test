@@ -1,0 +1,10 @@
+[servers]
+192.168.122.194
+
+#[servers:vars]
+#influxPass=password123
+#influxToken=596d7a9297fa7670017de369cdbaa73f1978eac92454f80dc42893d468b71ee9
+#influxOrganization=itp23111
+#influxBucket=telegraf
+#cloudadmin=admin
+#cloudpass=admin 

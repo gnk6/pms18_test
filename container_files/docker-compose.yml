@@ -1,0 +1,39 @@
+services:
+  influxdb:
+    hostname: influxdb
+    image: influxdb:latest
+    restart: always
+    volumes:
+      - influxdb-data:/var/lib/influxdb2:rw
+    env_file:
+      - .env
+    entrypoint: ["./entrypoint.sh"]
+    ports:
+      - ${DOCKER_INFLUXDB_INIT_PORT}:8086
+  grafana:
+    hostname: grafana
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    restart: always
+    volumes:
+      - grafana-data:/var/lib/grafana:rw
+    depends_on:
+      - influxdb
+    ports:
+      - ${GRAFANA_PORT}:3000
+  owncloud:
+    hostname: owncloud
+    image: owncloud:latest
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 8080:80
+    volumes:
+      - owncloud-data:/var/www/html/data
+
+volumes:
+  influxdb-data:
+  grafana-data:
+  owncloud-data:

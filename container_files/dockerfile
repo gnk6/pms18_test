@@ -1,0 +1,5 @@
+FROM grafana/grafana
+
+COPY ./grafana/ds_default.yaml /etc/grafana/provisioning/datasources/default.yaml
+COPY ./grafana/dash_default.yaml /etc/grafana/provisioning/dashboards/default.yaml
+COPY ./grafana/Container-stats-1716989890499.json /etc/grafana/provisioning/dashboards/Container-stats-1716989890499.json
