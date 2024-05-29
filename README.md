@@ -17,7 +17,7 @@ Influxdb and Telgraf are preconfigured to collect metrics from the running syste
 server1
 server2
 
-2. Alter the content of file "group_vars/servers". An example of the configuration is the below. To create the influxdb token run "openssl rand -hex 32"
+2. Alter the content of file "group_vars/servers". An example of the configuration is the below.
 influxPass: password
 influxToken: 43430rerfeferf3r32r23r23rf
 influxOrganization: org
@@ -25,5 +25,8 @@ influxBucket: bucket
 cloudadmin: admin
 cloudpass: admin
 
-3. Run the below to deploy it.
+4. Run the below to deploy it.
 ansible-playbook system_deploy.yml
+
+PS1. To create the influxdb token run "openssl rand -hex 32"
+PS2. InfluxDB pass should have at least 8 character.
