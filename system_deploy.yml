@@ -1,0 +1,69 @@
+---
+- name: Deploy system
+  hosts: servers
+  gather_facts: no
+  tasks:
+    - name: Deploy system
+      block:
+        - name: Create work directory
+          file:
+            path: /usr/share/docker_files
+            state: directory
+        - name: Copy repo and docker files
+          copy:
+            src: "container_files/{{ item }}"
+            dest: /usr/share/docker_files
+          loop:
+            - docker-compose.yml
+            - dockerfile
+            - repo.sh
+            - entrypoint.sh
+            - grafana
+        - name: Run repo script
+          shell: '/bin/bash /usr/share/docker_files/repo.sh'
+          register: repo_out
+        - name: Print docker repo output
+          debug:
+            var: repo_out.stdout_lines
+        - name: Install needed packages
+          apt:
+            name: "{{ item }}"
+            state: present
+          loop:
+            - docker-buildx-plugin
+            - docker-ce-cli
+            - docker-ce-rootless-extras
+            - docker-ce
+            - docker-compose-plugin
+            - telegraf
+        - name: Fix telegraf permissions
+          user:
+            name: telegraf
+            groups: docker
+        - name: Manage docker service
+          service:
+            name: docker
+            state: started
+            enabled: true
+        - name: Copy template files
+          template: 
+            src: "{{ item.source }}"
+            dest: "{{ item.destination }}"
+          loop:
+            - source: container_templates/telegraf.conf.j2
+              destination: /etc/telegraf/telegraf.conf
+            - source: container_templates/env.j2
+              destination: /usr/share/docker_files/.env
+        - name: Run docker compose
+          shell: 'docker compose -f /usr/share/docker_files/docker-compose.yml up -d'
+          register: docker_out
+        - name: Print docker output
+          debug:
+            var: docker_out.stdout_lines
+      notify: Manage telegraf service
+  handlers:
+    - name: Manage telegraf service
+      service:
+        name: telegraf
+        state: started
+        enabled: true
