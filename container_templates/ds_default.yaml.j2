@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+- orgId: 1
+  version: 3
+  name: 'influxdb6'
+  type: 'influxdb'
+  access: 'proxy'
+  url: 'http://influxdb:8086'
+  isDefault: true
+  jsonData:
+    version: 'Flux'
+    defaultBucket: '{{ influxBucket }}'
+    httpMode: 'POST'
+    organization: '{{ influxOrganization }}'
+  secureJsonData:
+    token: '{{ 59d3fbc856a3a56eac24df8a5bff0d6712a10121cb5b4c9c553152d3bc4f0874 }}'
