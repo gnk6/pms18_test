@@ -54,6 +54,8 @@
               destination: /etc/telegraf/telegraf.conf
             - source: container_templates/env.j2
               destination: /usr/share/docker_files/.env
+            - source: container_templates/ds_default.yaml.j2
+              destination: /usr/share/docker_files/grafana/ds_default.yaml
         - name: Run docker compose
           shell: 'docker compose -f /usr/share/docker_files/docker-compose.yml up -d'
           register: docker_out
