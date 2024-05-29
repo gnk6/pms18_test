@@ -25,5 +25,8 @@ influxBucket: bucket
 cloudadmin: admin
 cloudpass: admin
 
-3. Run the below to deploy it.
+4. Run the below to deploy it.
 ansible-playbook system_deploy.yml
+
+PS1. To create the influxdb token run "openssl rand -hex 32"
+PS2. InfluxDB pass should have at least 8 character.
