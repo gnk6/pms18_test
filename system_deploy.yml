@@ -68,5 +68,5 @@
     - name: Manage telegraf service
       service:
         name: telegraf
-        state: started
+        state: restarted
         enabled: true
