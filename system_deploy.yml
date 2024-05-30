@@ -40,6 +40,7 @@
           user:
             name: telegraf
             groups: docker
+            append: true
         - name: Manage docker service
           service:
             name: docker
