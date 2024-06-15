@@ -1,6 +1,6 @@
 ### Description ###
 Ansible playbook to deploy Influxdb, Telegraf, Grafana and owncloud in Debian system. 
-Influxdb and Telgraf are preconfigured to collect metrics from the running system's containers. This data is getting vizualizes in Grafana dashboard.
+Influxdb and Telgraf are preconfigured to collect metrics from the running system's containers. This data is getting vizualized in Grafana dashboard.
 
 
 
