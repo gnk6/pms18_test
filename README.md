@@ -18,11 +18,17 @@ server1
 server2
 
 2. Alter the content of file "group_vars/servers". An example of the configuration is the below.
+   
 influxPass: password
+
 influxToken: 43430rerfeferf3r32r23r23rf
+
 influxOrganization: org
+
 influxBucket: bucket
+
 cloudadmin: admin
+
 cloudpass: admin
 
 4. Run the below to deploy it.
